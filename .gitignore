@@ -1,0 +1,115 @@
+# ================================
+# OS
+# ================================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+
+# ================================
+# IntelliJ IDEA
+# ================================
+
+.idea/
+*.iml
+*.iws
+*.ipr
+
+
+# ================================
+# Java / Maven
+# ================================
+
+target/
+*.class
+
+.mvn/wrapper/maven-wrapper.jar
+
+# Maven build output
+**/target/
+
+# Generated build directories
+**/build/
+
+
+# ================================
+# Spring / IDE
+# ================================
+
+.springBeans
+.sts4-cache
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+
+
+# ================================
+# VS Code
+# ================================
+
+.vscode/
+
+
+# ================================
+# Node / React
+# ================================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+dist/
+build/
+
+.npm/
+.cache/
+
+
+# ================================
+# Environment / Secrets
+# ================================
+
+.env
+.env.*
+!.env.example
+
+*.pem
+*.key
+
+
+# ================================
+# Logs
+# ================================
+
+*.log
+logs/
+
+
+# ================================
+# Coverage
+# ================================
+
+coverage/
+.nyc_output/
+
+
+# ================================
+# Docker
+# ================================
+
+docker-compose.override.yml
+
+
+# ================================
+# Temporary files
+# ================================
+
+*.tmp
+*.temp
+*.swp
+*.swo
