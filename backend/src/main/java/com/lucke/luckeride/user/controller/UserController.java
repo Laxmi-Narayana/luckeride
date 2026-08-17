@@ -7,7 +7,12 @@ import com.lucke.luckeride.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -17,6 +22,25 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<Map<String, String>> getCurrentUser(
+            Authentication authentication
+    ) {
+        String role = authentication.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse("UNKNOWN");
+
+        return ResponseEntity.ok(
+                Map.of(
+                        "email", authentication.getName(),
+                        "role", role
+                )
+        );
     }
 
     @PostMapping

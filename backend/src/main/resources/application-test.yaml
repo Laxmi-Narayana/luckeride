@@ -18,10 +18,6 @@ spring:
 
 app:
   jwt:
-    secret: ${JWT_SECRET}
+    secret: test-only-luckeride-jwt-secret-32-bytes-minimum
     access-token-expiration: 15m
     refresh-token-expiration: 7d
-
-logging:
-  level:
-    org.springframework.security: DEBUG
