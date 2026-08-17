@@ -2,6 +2,7 @@ package com.lucke.luckeride.auth.controller;
 
 import com.lucke.luckeride.auth.dto.AuthResponse;
 import com.lucke.luckeride.auth.dto.LoginRequest;
+import com.lucke.luckeride.auth.dto.RefreshTokenRequest;
 import com.lucke.luckeride.auth.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,9 @@ public class AuthController {
 
     private final AuthenticationService authenticationService;
 
-    public AuthController(AuthenticationService authenticationService) {
+    public AuthController(
+            AuthenticationService authenticationService
+    ) {
         this.authenticationService = authenticationService;
     }
 
@@ -23,6 +26,17 @@ public class AuthController {
     ) {
         return ResponseEntity.ok(
                 authenticationService.login(request)
+        );
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refresh(
+            @Valid @RequestBody RefreshTokenRequest request
+    ) {
+        return ResponseEntity.ok(
+                authenticationService.refresh(
+                        request.refreshToken()
+                )
         );
     }
 }
