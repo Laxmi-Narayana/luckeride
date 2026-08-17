@@ -2,9 +2,11 @@ package com.lucke.luckeride.auth.controller;
 
 import com.lucke.luckeride.auth.dto.AuthResponse;
 import com.lucke.luckeride.auth.dto.LoginRequest;
+import com.lucke.luckeride.auth.dto.LogoutRequest;
 import com.lucke.luckeride.auth.dto.RefreshTokenRequest;
 import com.lucke.luckeride.auth.service.AuthenticationService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +39,16 @@ public class AuthController {
                 authenticationService.refresh(
                         request.refreshToken()
                 )
+        );
+    }
+
+    @PostMapping("/logout")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void logout(
+            @Valid @RequestBody LogoutRequest request
+    ) {
+        authenticationService.logout(
+                request.refreshToken()
         );
     }
 }

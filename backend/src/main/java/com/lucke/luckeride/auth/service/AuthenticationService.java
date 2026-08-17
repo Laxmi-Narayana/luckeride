@@ -82,4 +82,10 @@ public class AuthenticationService {
                 jwtService.getAccessTokenExpirationSeconds()
         );
     }
+
+    @Transactional
+    public void logout(String refreshToken) {
+
+        refreshTokenService.revokeRefreshToken(refreshToken);
+    }
 }

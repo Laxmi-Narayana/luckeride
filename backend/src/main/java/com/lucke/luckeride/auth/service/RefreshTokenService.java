@@ -144,4 +144,24 @@ public class RefreshTokenService {
             );
         }
     }
+
+    @Transactional
+    public void revokeRefreshToken(String rawToken) {
+
+        String tokenHash = hash(rawToken);
+
+        RefreshToken refreshToken = refreshTokenRepository
+                .findByTokenHashForUpdate(tokenHash)
+                .orElseThrow(() ->
+                        new InvalidRefreshTokenException(
+                                "Refresh token not found"
+                        )
+                );
+
+        if (refreshToken.isRevoked()) {
+            return;
+        }
+
+        refreshToken.revoke();
+    }
 }
