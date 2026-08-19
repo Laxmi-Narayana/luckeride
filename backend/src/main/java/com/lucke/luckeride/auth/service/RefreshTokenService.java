@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
@@ -163,5 +164,20 @@ public class RefreshTokenService {
         }
 
         refreshToken.revoke();
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void revokeAllForUser(UUID userId) {
+        int revokedCount =
+                refreshTokenRepository.revokeAllForUser(
+                        userId,
+                        Instant.now()
+                );
+
+        log.info(
+                "Revoked {} refresh token(s) for user {}",
+                revokedCount,
+                userId
+        );
     }
 }

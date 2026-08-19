@@ -1,4 +1,4 @@
-package com.lucke.luckeride.auth.dto;
+package com.lucke.luckeride.auth.security;
 
 public record AuthResponse(
         String accessToken,

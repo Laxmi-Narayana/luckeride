@@ -1,6 +1,6 @@
 package com.lucke.luckeride.auth.controller;
 
-import com.lucke.luckeride.auth.dto.AuthResponse;
+import com.lucke.luckeride.auth.security.AuthResponse;
 import com.lucke.luckeride.auth.dto.LoginRequest;
 import com.lucke.luckeride.auth.dto.LogoutRequest;
 import com.lucke.luckeride.auth.dto.RefreshTokenRequest;

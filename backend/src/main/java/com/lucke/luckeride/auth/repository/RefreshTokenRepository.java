@@ -39,4 +39,19 @@ public interface RefreshTokenRepository
             @Param("familyId") UUID familyId,
             @Param("revokedAt") Instant revokedAt
     );
+
+    @Modifying(
+            clearAutomatically = true,
+            flushAutomatically = true
+    )
+    @Query("""
+        update RefreshToken rt
+        set rt.revokedAt = :revokedAt
+        where rt.user.id = :userId
+          and rt.revokedAt is null
+        """)
+    int revokeAllForUser(
+            @Param("userId") UUID userId,
+            @Param("revokedAt") Instant revokedAt
+    );
 }

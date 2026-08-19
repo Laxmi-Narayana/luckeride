@@ -28,43 +28,81 @@ public class User {
     private UUID id;
 
     @Setter
-    @Column(name = "email", nullable = false, unique = true, length = 255)
+    @Column(
+            name = "email",
+            nullable = false,
+            unique = true,
+            length = 255
+    )
     private String email;
 
     @Setter
-    @Column(name = "password_hash", nullable = false, length = 255)
+    @Column(
+            name = "password_hash",
+            nullable = false,
+            length = 255
+    )
     private String passwordHash;
 
     @Setter
-    @Column(name = "first_name", nullable = false, length = 100)
+    @Column(
+            name = "first_name",
+            nullable = false,
+            length = 100
+    )
     private String firstName;
 
     @Setter
-    @Column(name = "last_name", nullable = false, length = 100)
+    @Column(
+            name = "last_name",
+            nullable = false,
+            length = 100
+    )
     private String lastName;
 
     @Setter
-    @Column(name = "phone_number", nullable = false, unique = true, length = 20)
+    @Column(
+            name = "phone_number",
+            nullable = false,
+            unique = true,
+            length = 20
+    )
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false, length = 20)
+    @Column(
+            name = "role",
+            nullable = false,
+            length = 20
+    )
     private UserRole role;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 20)
+    @Column(
+            name = "status",
+            nullable = false,
+            length = 20
+    )
     private UserStatus status;
 
     @Setter(AccessLevel.NONE)
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(
+            name = "created_at",
+            nullable = false,
+            updatable = false
+    )
     private Instant createdAt;
 
     @Setter(AccessLevel.NONE)
-    @Column(name = "updated_at", nullable = false)
+    @Column(
+            name = "updated_at",
+            nullable = false
+    )
     private Instant updatedAt;
 
     @PrePersist
     protected void onCreate() {
+
         Instant now = Instant.now();
 
         if (id == null) {
@@ -104,5 +142,19 @@ public class User {
         user.phoneNumber = phoneNumber;
 
         return user;
+    }
+
+    public void updateProfile(
+            String firstName,
+            String lastName,
+            String phoneNumber
+    ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void changePassword(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
